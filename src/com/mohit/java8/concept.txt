@@ -1,0 +1,17 @@
+1. hamesha hi map me key ka value k liye  get() ke badle getOrDefault() nahi toh npe aa sakta if key is not present
+    int count = map.getOrDefault("A", 0);
+
+2. list ko reverse karna hai
+
+    Collections.reverse(list);
+
+    When not to modify original list :
+    List<Integer> sorted =
+        list.stream()
+            .sorted()
+            .collect(Collectors.toList());
+
+3. list.sort() is more modern.
+
+
+
