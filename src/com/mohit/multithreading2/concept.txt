@@ -1,0 +1,40 @@
+1. java me lock.wait() uss thead ko wait state me daalta
+
+   isme woh lock release karke wait karte jabki sleep() me thead lock release karke wait nahi karta
+
+2. notify() jitne bhi wait kar rhe hain usme se ek ko wake up karte
+   jabki notifyAll() sabko wake up karte
+
+   ab notifyAll() sabko karte phir sab compete karte lock k liye, usme se ek hi achieve karta
+   phir bhi faayda hai sabko notify karne ka
+   kyyunki nahi toh starvation ho jaayega
+   aur ek dikkat hai ki agar ek thread ko wake kiya aur woh uss lock pe wait nahi kar rha hoga toh ...
+
+3. kabhi kabhi Spurious wakeup hota hai jisme agr thread wait call hua phir bhi wake up ho jaata
+   os level pe hota
+   isliye kabhi bhi condition ho toh while(isfull) {  lock.wait()} karo , sirf if ke andar nahi
+
+
+4.
+  class test{
+      Object lock = new Object();
+
+      void check() {
+          synchronized (lock) {
+              System.out.println("here in outer block ");
+              synchronized (lock) {
+                  System.out.println("again inner block");
+              }
+          }
+      }
+  }
+
+  this proves ki synchronized is also reenterant. It means same thread can re-acquire the lock but not different thread.
+
+
+  5. Semaphore is mostly used for db pool locking where we have ki limited resource hai
+     but reentrant lock is for ki nested method me bhi lock lena hai ya lock() and unlock() separate method me karna hai
+
+
+  6. synchronized me block level ya method level pe hi lock le sakte jabki reentrant lock le sakte hain
+     and unlock() alag method me bhi kar sakte , reentrant me manually programmer ko unlock karna hai so do it in finally{} block
